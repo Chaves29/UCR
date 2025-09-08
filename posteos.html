@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posteos - Planificación Curricular en Ciencias Naturales</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>Planificación y diseño curricular</h1>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Inicio</a></li>
+                        <li><a href="recursos.html" class="nav-link">Recursos</a></li>
+                        <li><a href="posteos.html" class="nav-link active">Posteos</a></li>
+                    </ul>
+                </nav>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-posts">
+            <div class="hero-background">
+                <img src="nature-biology.svg" alt="Fondo biológico" class="hero-bg-image">
+            </div>
+            <div class="nature-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Posteos Educativos</h1>
+                    <p class="hero-subtitle">Posteos crítico-analíticos sobre textos especializados en <strong>planificación curricular</strong>, <em>metodologías innovadoras</em> y más... desde la mirada de una docente de ciencias naturales.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Posts Grid -->
+        <section class="posts-section">
+            <div class="container">
+                <div class="blog-posts" id="blogPosts">
+                    <!-- Los posts aparecerán aquí cuando se añadan manualmente -->
+                    <div class="empty-posts-message">
+                        <i class="fas fa-edit"></i>
+                        <h3>No hay posts publicados aún</h3>
+                        <p>Utiliza el formulario de abajo para crear tu primer análisis de lectura.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario para Nuevo Post -->
+        <section class="new-post-section">
+            <div class="container">
+                <div class="new-post-form-container">
+                    <h2 class="form-title">
+                        <i class="fas fa-edit"></i>
+                        Crear Nuevo Análisis de Lectura
+                    </h2>
+                    <form class="new-post-form" id="newPostForm">
+                        <div class="form-group">
+                            <label for="postTitle">Título del Análisis</label>
+                            <input type="text" id="postTitle" name="postTitle" placeholder="Ej: Análisis de 'Estrategias de Enseñanza' por Díaz-Barriga" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="postCategory">Categoría</label>
+                                <select id="postCategory" name="postCategory" required>
+                                    <option value="">Seleccionar categoría</option>
+                                    <option value="Planificación Curricular">Planificación Curricular</option>
+                                    <option value="Metodologías">Metodologías</option>
+                                    <option value="Evaluación">Evaluación</option>
+                                    <option value="Didáctica">Didáctica</option>
+                                    <option value="Neurociencia">Neurociencia</option>
+                                    <option value="Investigación">Investigación</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="readingAuthor">Autor de la Lectura</label>
+                                <input type="text" id="readingAuthor" name="readingAuthor" placeholder="Ej: Frida Díaz-Barriga" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postTags">Etiquetas (separadas por comas)</label>
+                            <input type="text" id="postTags" name="postTags" placeholder="Ej: constructivismo, aprendizaje significativo, estrategias">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postExcerpt">Resumen del Análisis</label>
+                            <textarea id="postExcerpt" name="postExcerpt" rows="3" placeholder="Breve descripción del análisis realizado..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postContent">Contenido del Análisis</label>
+                            <textarea id="postContent" name="postContent" rows="12" placeholder="Desarrolla aquí tu análisis crítico de la lectura asignada..." required></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="clearForm()">Limpiar</button>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-save"></i>
+                                Publicar Análisis
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Planificación y diseño curricular</h3>
+                    </div>
+                    <p>Reflexiones desde la perspectiva de una docente de ciencias naturales</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-user"></i> Adriana Cabezas</p>
+                        <p><i class="fas fa-envelope"></i> adriana.cabezas@ucr.ac.cr</p>
+                        <p><i class="fas fa-phone"></i> 8501-2072</p>
+                        <p><i class="fas fa-university"></i> Universidad de Costa Rica</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Costa Rica</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 EduNatura. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

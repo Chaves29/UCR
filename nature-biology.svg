@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" style="background: transparent;">
+  <defs>
+    <!-- Gradientes orgánicos -->
+    <linearGradient id="leafGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a7c59;stop-opacity:0.8"/>
+      <stop offset="50%" style="stop-color:#6b9080;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#a4c3b2;stop-opacity:0.4"/>
+    </linearGradient>
+    
+    <radialGradient id="cellGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8fbc8f;stop-opacity:0.7"/>
+      <stop offset="70%" style="stop-color:#6b9080;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#4a7c59;stop-opacity:0.3"/>
+    </radialGradient>
+    
+    <linearGradient id="dnaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#a4c3b2;stop-opacity:0.8"/>
+      <stop offset="50%" style="stop-color:#6b9080;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#4a7c59;stop-opacity:0.4"/>
+    </linearGradient>
+    
+    <!-- Animaciones -->
+    <animateTransform id="floatAnimation" attributeName="transform" type="translate" 
+                      values="0,0; 0,-10; 0,0" dur="4s" repeatCount="indefinite"/>
+    
+    <animateTransform id="rotateAnimation" attributeName="transform" type="rotate" 
+                      values="0 400 300; 360 400 300" dur="20s" repeatCount="indefinite"/>
+    
+    <animate id="pulseAnimation" attributeName="opacity" 
+             values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+  </defs>
+  
+  <!-- Hojas flotantes -->
+  <g opacity="0.6">
+    <path d="M100,150 Q120,130 140,150 Q120,170 100,150 Z" fill="url(#leafGradient)">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0; 5,-8; 0,0" dur="5s" repeatCount="indefinite"/>
+    </path>
+    
+    <path d="M300,80 Q325,60 350,80 Q325,100 300,80 Z" fill="url(#leafGradient)">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0; -3,-12; 0,0" dur="6s" repeatCount="indefinite"/>
+    </path>
+    
+    <path d="M600,200 Q630,180 660,200 Q630,220 600,200 Z" fill="url(#leafGradient)">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0; 8,-5; 0,0" dur="4.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Células y estructuras orgánicas -->
+  <g opacity="0.5">
+    <circle cx="200" cy="300" r="25" fill="url(#cellGradient)">
+      <animate attributeName="r" values="25;30;25" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="500" cy="150" r="20" fill="url(#cellGradient)">
+      <animate attributeName="r" values="20;25;20" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="700" cy="400" r="30" fill="url(#cellGradient)">
+      <animate attributeName="r" values="30;35;30" dur="5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Estructura de ADN -->
+  <g opacity="0.4">
+    <path d="M50,400 Q100,380 150,400 Q200,420 250,400" 
+          stroke="url(#dnaGradient)" stroke-width="3" fill="none">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0; 0,-5; 0,0" dur="6s" repeatCount="indefinite"/>
+    </path>
+    
+    <path d="M50,410 Q100,430 150,410 Q200,390 250,410" 
+          stroke="url(#dnaGradient)" stroke-width="3" fill="none">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0; 0,5; 0,0" dur="6s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Conexiones del ADN -->
+    <line x1="75" y1="395" x2="75" y2="415" stroke="url(#dnaGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="125" y1="405" x2="125" y2="415" stroke="url(#dnaGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="175" y1="395" x2="175" y2="415" stroke="url(#dnaGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="225" y1="405" x2="225" y2="395" stroke="url(#dnaGradient)" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <!-- Moléculas y compuestos -->
+  <g opacity="0.3">
+    <circle cx="400" cy="450" r="8" fill="#6b9080">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="420" cy="440" r="6" fill="#8fbc8f">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="410" cy="465" r="7" fill="#a4c3b2">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Conexiones moleculares -->
+    <line x1="400" y1="450" x2="420" y2="440" stroke="#6b9080" stroke-width="2" opacity="0.5"/>
+    <line x1="400" y1="450" x2="410" y2="465" stroke="#6b9080" stroke-width="2" opacity="0.5"/>
+  </g>
+  
+  <!-- Formas orgánicas adicionales -->
+  <g opacity="0.4">
+    <ellipse cx="150" cy="500" rx="40" ry="15" fill="url(#leafGradient)" transform="rotate(15 150 500)">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="15 150 500; 25 150 500; 15 150 500" dur="8s" repeatCount="indefinite"/>
+    </ellipse>
+    
+    <ellipse cx="550" cy="350" rx="35" ry="12" fill="url(#leafGradient)" transform="rotate(-20 550 350)">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="-20 550 350; -10 550 350; -20 550 350" dur="7s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+  
+  <!-- Patrones de crecimiento -->
+  <g opacity="0.2">
+    <path d="M650,100 Q670,120 690,100 Q710,120 730,100" 
+          stroke="#a4c3b2" stroke-width="2" fill="none">
+      <animate attributeName="stroke-dasharray" values="0,100; 50,50; 100,0" dur="10s" repeatCount="indefinite"/>
+    </path>
+    
+    <path d="M80,250 Q100,270 120,250 Q140,270 160,250" 
+          stroke="#8fbc8f" stroke-width="2" fill="none">
+      <animate attributeName="stroke-dasharray" values="0,100; 50,50; 100,0" dur="12s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>
