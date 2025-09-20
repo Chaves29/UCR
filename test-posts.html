@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Posts</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Test Posts Debug</h1>
+    
+    <button onclick="clearStorage()">Limpiar localStorage</button>
+    <button onclick="loadPosts()">Cargar Posts</button>
+    <button onclick="showPosts()">Mostrar Posts</button>
+    
+    <div id="debug" class="debug"></div>
+    
+    <script>
+        function log(message) {
+            const debug = document.getElementById('debug');
+            debug.innerHTML += '<p>' + new Date().toLocaleTimeString() + ': ' + message + '</p>';
+            console.log(message);
+        }
+        
+        function clearStorage() {
+            localStorage.removeItem('blogPosts');
+            log('localStorage limpiado');
+        }
+        
+        function loadPosts() {
+            log('Iniciando carga de posts...');
+            
+            // Simular createDefaultPost
+            const defaultPost = {
+                id: 'post-1-fundamentos',
+                title: 'Fundamentos del currículo: Una mirada crítica desde la enseñanza de las ciencias',
+                category: 'Análisis Curricular'
+            };
+            
+            // Simular createDefaultPost2
+            const defaultPost2 = {
+                id: 'post-2-elementos-curriculo',
+                title: 'Los elementos del currículo como sistema integrado: reflexiones desde la enseñanza de las ciencias',
+                category: 'Análisis Curricular'
+            };
+            
+            let posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+            log('Posts existentes: ' + posts.length);
+            
+            // Agregar post 1
+            const existingPost1Index = posts.findIndex(p => p.title === defaultPost.title);
+            if (existingPost1Index !== -1) {
+                posts[existingPost1Index] = defaultPost;
+                log('Post 1 actualizado');
+            } else {
+                posts.unshift(defaultPost);
+                log('Post 1 agregado');
+            }
+            
+            // Agregar post 2
+            const existingPost2Index = posts.findIndex(p => p.title === defaultPost2.title);
+            if (existingPost2Index !== -1) {
+                posts[existingPost2Index] = defaultPost2;
+                log('Post 2 actualizado');
+            } else {
+                posts.unshift(defaultPost2);
+                log('Post 2 agregado');
+            }
+            
+            localStorage.setItem('blogPosts', JSON.stringify(posts));
+            log('Posts guardados en localStorage');
+        }
+        
+        function showPosts() {
+            const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+            log('=== POSTS EN LOCALSTORAGE ===');
+            log('Total de posts: ' + posts.length);
+            posts.forEach((post, index) => {
+                log(`Post ${index + 1}: ${post.title}`);
+            });
+            log('=== FIN POSTS ===');
+        }
+        
+        // Auto-ejecutar al cargar
+        window.addEventListener('load', () => {
+            log('Página cargada');
+            showPosts();
+        });
+    </script>
+</body>
+</html>

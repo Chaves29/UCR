@@ -52,76 +52,12 @@
         <section class="posts-section">
             <div class="container">
                 <div class="blog-posts" id="blogPosts">
-                    <!-- Los posts aparecerán aquí cuando se añadan manualmente -->
-                    <div class="empty-posts-message">
-                        <i class="fas fa-edit"></i>
-                        <h3>No hay posts publicados aún</h3>
-                        <p>Utiliza el formulario de abajo para crear tu primer análisis de lectura.</p>
-                    </div>
+                    <!-- Los posts aparecerán aquí automáticamente -->
                 </div>
             </div>
         </section>
 
-        <!-- Formulario para Nuevo Post -->
-        <section class="new-post-section">
-            <div class="container">
-                <div class="new-post-form-container">
-                    <h2 class="form-title">
-                        <i class="fas fa-edit"></i>
-                        Crear Nuevo Análisis de Lectura
-                    </h2>
-                    <form class="new-post-form" id="newPostForm">
-                        <div class="form-group">
-                            <label for="postTitle">Título del Análisis</label>
-                            <input type="text" id="postTitle" name="postTitle" placeholder="Ej: Análisis de 'Estrategias de Enseñanza' por Díaz-Barriga" required>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="postCategory">Categoría</label>
-                                <select id="postCategory" name="postCategory" required>
-                                    <option value="">Seleccionar categoría</option>
-                                    <option value="Planificación Curricular">Planificación Curricular</option>
-                                    <option value="Metodologías">Metodologías</option>
-                                    <option value="Evaluación">Evaluación</option>
-                                    <option value="Didáctica">Didáctica</option>
-                                    <option value="Neurociencia">Neurociencia</option>
-                                    <option value="Investigación">Investigación</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="readingAuthor">Autor de la Lectura</label>
-                                <input type="text" id="readingAuthor" name="readingAuthor" placeholder="Ej: Frida Díaz-Barriga" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="postTags">Etiquetas (separadas por comas)</label>
-                            <input type="text" id="postTags" name="postTags" placeholder="Ej: constructivismo, aprendizaje significativo, estrategias">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="postExcerpt">Resumen del Análisis</label>
-                            <textarea id="postExcerpt" name="postExcerpt" rows="3" placeholder="Breve descripción del análisis realizado..." required></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="postContent">Contenido del Análisis</label>
-                            <textarea id="postContent" name="postContent" rows="12" placeholder="Desarrolla aquí tu análisis crítico de la lectura asignada..." required></textarea>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="button" class="btn-secondary" onclick="clearForm()">Limpiar</button>
-                            <button type="submit" class="btn-primary">
-                                <i class="fas fa-save"></i>
-                                Publicar Análisis
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
+
     </main>
 
     <!-- Footer -->
@@ -155,5 +91,116 @@
     </footer>
 
     <script src="script.js"></script>
+    
+    <script>
+        console.log('=== CARGA FORZADA DE POSTS ===');
+        
+        // Limpiar localStorage
+        localStorage.removeItem('blogPosts');
+        
+        // Crear posts directamente
+         const posts = [
+             {
+                 id: 'post-1-sociedad-educacion-cultura',
+                 title: 'De las intenciones a la práctica: reflexiones sobre educación, sociedad y currículo desde la experiencia como docente en ciencias',
+                 category: 'Fundamentos Educativos',
+                 author: 'Docente de Ciencias Naturales',
+                 tags: 'sociedad, educación, cultura, contexto social, enseñanza científica',
+                 excerpt: 'Reflexión sobre la interrelación entre sociedad, educación y cultura en la formación científica, basada en el primer capítulo de "Fundamentos del currículo" de Zaida Molina Bogantes.',
+                 content: `De las intenciones a la práctica: reflexiones sobre educación, sociedad y currículo desde la experiencia como docente en ciencias
+
+El primer capítulo de "Fundamentos del currículo" de Zaida Molina Bogantes presenta una radiografía precisa de los desafíos que enfrentamos en la educación contemporánea. Como docente de ciencias, encuentro particularmente relevante la forma en que la autora articula las demandas sociales actuales con la necesidad de transformación curricular, estableciendo un puente conceptual entre las intenciones educativas y su materialización en el aula.
+
+## La educación ante los retos de la sociedad globalizada
+
+Bogantes inicia su análisis reconociendo que "la educación debe responder a nuevos retos que conllevan cambios en todos los aspectos", una premisa que cobra especial significado en la enseñanza de las ciencias. La globalización y la sociedad de la información han transformado radicalmente no solo qué enseñamos, sino cómo nuestros estudiantes acceden y procesan el conocimiento científico.
+
+La reflexión de José Joaquín Brunner, citada por la autora, resulta especialmente pertinente: "el problema para la educación en la actualidad no es dónde encontrar la información sino cómo ofrecer acceso sin exclusiones a ella y, a la vez, enseñar a aprender a seleccionarla, a evaluarla, e interpretarla". En el contexto de la educación científica, esto implica una transformación fundamental del rol docente: de ser transmisores de contenidos científicos a facilitadores del pensamiento crítico y la indagación.
+
+En mi experiencia como docente en ciencias, he observado cómo los estudiantes llegan al aula con información fragmentada obtenida de múltiples fuentes digitales, pero carecen de las herramientas para discriminar entre evidencia científica rigurosa y pseudociencia. Esta realidad válida la preocupación de Bogantes sobre la necesidad de desarrollar "funciones cognitivas superiores" que permitan navegar efectivamente en un "medio saturado de información".
+
+## Las tensiones del siglo XXI en el currículo científico
+
+Los retos específicos que la autora extrae del informe de Delors cobran vida en la práctica educativa diaria. Particularmente relevante es la "tensión entre lo mundial y lo local", que se manifiesta claramente en la enseñanza de las ciencias ambientales. ¿Cómo formamos ciudadanos conscientes del cambio climático global mientras los conectamos con los ecosistemas locales costarricenses? ¿Cómo equilibramos el conocimiento científico universal con el saber tradicional de nuestras comunidades?
+
+La "tensión entre tradición y modernidad" se evidencia en la resistencia que a veces encontramos al incorporar metodologías activas de aprendizaje científico, como la indagación y el aprendizaje basado en problemas, cuando tanto docentes como padres de familia mantienen expectativas más tradicionales sobre la "transmisión" de conocimientos científicos.
+
+## De la concepción a la materialización curricular
+
+La distinción que hace Peñaloza Ramella, citado por Bogantes, entre la "concepción de la educación" y su "materialización" a través del currículo, resulta fundamental para comprender los desafíos de la implementación. En el ámbito científico, esta tensión se vuelve particularmente compleja cuando las intenciones curriculares nacionales promueven la alfabetización científica y el pensamiento crítico, pero las condiciones materiales de muchas instituciones (laboratorios limitados, recursos tecnológicos insuficientes, tiempo de clase restringido) dificultan su implementación efectiva.
+
+La propuesta de Bogantes sobre los tres niveles de concreción curricular (macro, meso y micro) refleja una realidad que vivimos cotidianamente los docentes de ciencias. A nivel macro, los programas oficiales del MEP establecen objetivos ambiciosos relacionados con competencias científicas del siglo XXI. Sin embargo, a nivel micro, en el aula, nos enfrentamos a la necesidad constante de "traducir" estos lineamientos a la realidad específica de nuestros estudiantes y contextos institucionales.
+
+## El docente como agente de transformación curricular
+
+Bogantes enfatiza que "el docente al final debe hacer efectivos los planeamientos curriculares en su práctica pedagógica cotidiana", lo que implica una responsabilidad enorme pero también una oportunidad única de impacto. En la enseñanza de las ciencias, esto significa que somos nosotros quienes determinamos si la educación científica contribuye realmente a formar ciudadanos críticos capaces de tomar decisiones informadas sobre temas científico-tecnológicos que afectan sus vidas.
+
+La experiencia docente me ha mostrado que esta responsabilidad requiere una formación continua no solo en contenidos científicos, sino en pedagogía, tecnología educativa y comprensión del contexto sociocultural de nuestros estudiantes. La "educación a lo largo de la vida" que menciona el informe de Delors no es solo un objetivo para nuestros estudiantes, sino una necesidad imperante para nosotros como educadores.
+
+## Reflexiones hacia una educación científica transformadora
+
+El análisis de Bogantes nos invita a reflexionar sobre si realmente estamos aprovechando el potencial transformador de la educación científica. ¿Estamos formando estudiantes que puedan "dirigir cabalmente su propio desarrollo" en un mundo cada vez más tecnologizado? ¿Nuestras prácticas pedagógicas contribuyen a "disminuir la vulnerabilidad social" de estudiantes de contextos desfavorecidos, o perpetúan brechas en el acceso al conocimiento científico?
+
+La educación científica tiene un rol privilegiado para contribuir al "nuevo humanismo con componente ético esencial" que propone Delors, especialmente en temas como bioética, sostenibilidad ambiental y responsabilidad tecnológica. Sin embargo, esto requiere que superemos la fragmentación tradicional del conocimiento y promovamos una visión más holística e interdisciplinaria de la ciencia.
+
+## Referencias bibliográficas
+
+Bogantes, Z. M. (2018). Fundamentos del currículo. Editorial Universidad Estatal a Distancia (EUNED).`,
+                 date: new Date().toLocaleDateString('es-ES', {
+                     year: 'numeric',
+                     month: 'long',
+                     day: 'numeric'
+                 }),
+                 readTime: 7
+             },
+             {
+                 id: 'post-2-elementos-curriculo',
+                 title: 'Los elementos del currículo como sistema integrado: reflexiones desde la enseñanza de las ciencias',
+                 category: 'Análisis Curricular',
+                 author: 'Docente de Ciencias Naturales',
+                 tags: 'currículo, elementos curriculares, sistema educativo, enseñanza científica, integración pedagógica',
+                 excerpt: 'Análisis del segundo capítulo de "Fundamentos del currículo" de Zaida Molina Bogantes, explorando la arquitectura curricular sistémica y su aplicación en la educación científica.',
+                 content: `Los elementos del currículo como sistema integrado: reflexiones desde la enseñanza de las ciencias
+ 
+ El capítulo 2 de Bogantes nos presenta una arquitectura curricular compleja y sistémica que trasciende la visión tradicional de elementos aislados. Como docente de ciencias, encuentro particularmente reveladora la clasificación funcional que propone Soto Guzmán, que organiza los componentes curriculares no solo por su naturaleza, sino por el rol que desempeñan en el proceso educativo: orientadores, generadores, reguladores, activadores y multimedios.
+ 
+ ## La funcionalidad sistémica de los elementos curriculares
+ 
+ La propuesta de Soto Guzmán resulta especialmente pertinente para comprender cómo los elementos curriculares "interactúan y se apoyan unos a otros" en la práctica educativa. En mi experiencia enseñando ciencias, he observado cómo esta interacción se manifiesta de manera particularmente evidente: los elementos orientadores (objetivos educativos nacionales) se concretan a través de los elementos reguladores (objetivos específicos de ciencias, contenidos científicos programáticos), se materializan mediante los elementos activadores (estrategias metodológicas como la indagación científica), y se enriquecen con los elementos generadores (estudiantes que traen sus concepciones previas sobre fenómenos naturales).
+ 
+ Esta visión sistémica contrasta con enfoques fragmentarios que tratan cada elemento de manera aislada. En la enseñanza de las ciencias, resulta imposible separar artificialmente los contenidos conceptuales de los procedimentales: cuando los estudiantes aprenden sobre fotosíntesis, no solo adquieren conceptos sobre transformación de energía, sino que desarrollan habilidades de observación, formulación de hipótesis y análisis de evidencia.
+ 
+ ## Referencias bibliográficas
+ 
+ Bogantes, Z. M. (2018). Fundamentos del currículo. Editorial Universidad Estatal a Distancia (EUNED).`,
+                 date: new Date().toLocaleDateString('es-ES', {
+                     year: 'numeric',
+                     month: 'long',
+                     day: 'numeric'
+                 }),
+                 readTime: 9
+             }
+         ];
+        
+        // Guardar en localStorage
+        localStorage.setItem('blogPosts', JSON.stringify(posts));
+        console.log('Posts cargados directamente:', posts.length);
+        
+        // Ejecutar updatePostsDisplay si existe
+        if (typeof updatePostsDisplay === 'function') {
+            console.log('Ejecutando updatePostsDisplay...');
+            updatePostsDisplay();
+        } else {
+            console.log('updatePostsDisplay no disponible, esperando...');
+            setTimeout(() => {
+                if (typeof updatePostsDisplay === 'function') {
+                    console.log('updatePostsDisplay disponible, ejecutando...');
+                    updatePostsDisplay();
+                } else {
+                    console.log('updatePostsDisplay aún no disponible');
+                }
+            }, 1000);
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Posts</title>
+</head>
+<body>
+    <h1>Debug Posts</h1>
+    <button onclick="clearStorage()">Limpiar localStorage</button>
+    <button onclick="loadPosts()">Cargar Posts</button>
+    <button onclick="showPosts()">Mostrar Posts</button>
+    <div id="output"></div>
+
+    <script>
+        function clearStorage() {
+            localStorage.removeItem('blogPosts');
+            document.getElementById('output').innerHTML = '<p>localStorage limpiado</p>';
+        }
+
+        function loadPosts() {
+            // Simular la carga de ambos posts
+            const posts = [
+                {
+                    id: 'post-1-fundamentos-curriculo',
+                    title: 'Fundamentos del currículo: Una mirada crítica desde la enseñanza de las ciencias',
+                    category: 'Análisis Curricular',
+                    author: 'Docente de Ciencias Naturales',
+                    tags: 'currículo, fundamentos, educación científica, pedagogía crítica',
+                    excerpt: 'Análisis crítico del primer capítulo de "Fundamentos del currículo" de Zaida Molina Bogantes, desde la perspectiva de la enseñanza de las ciencias naturales.',
+                    content: 'Contenido del post 1...',
+                    date: new Date().toLocaleDateString('es-ES'),
+                    readTime: 8
+                },
+                {
+                    id: 'post-2-elementos-curriculo',
+                    title: 'Los elementos del currículo como sistema integrado: reflexiones desde la enseñanza de las ciencias',
+                    category: 'Análisis Curricular',
+                    author: 'Docente de Ciencias Naturales',
+                    tags: 'currículo, elementos curriculares, sistema educativo, enseñanza científica, integración pedagógica',
+                    excerpt: 'Análisis del segundo capítulo de "Fundamentos del currículo" de Zaida Molina Bogantes, explorando la arquitectura curricular sistémica y su aplicación en la educación científica.',
+                    content: 'Contenido del post 2...',
+                    date: new Date().toLocaleDateString('es-ES'),
+                    readTime: 9
+                }
+            ];
+            
+            localStorage.setItem('blogPosts', JSON.stringify(posts));
+            document.getElementById('output').innerHTML = '<p>Posts cargados: ' + posts.length + '</p>';
+        }
+
+        function showPosts() {
+            const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+            const output = document.getElementById('output');
+            output.innerHTML = '<h3>Posts en localStorage:</h3>';
+            posts.forEach((post, index) => {
+                output.innerHTML += `<p>${index + 1}. ${post.title}</p>`;
+            });
+        }
+    </script>
+</body>
+</html>

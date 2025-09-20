@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posteos - Planificación Curricular en Ciencias Naturales</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>Planificación y diseño curricular</h1>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Inicio</a></li>
+                        <li><a href="recursos.html" class="nav-link">Recursos</a></li>
+                        <li><a href="posteos.html" class="nav-link active">Posteos</a></li>
+                    </ul>
+                </nav>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-posts">
+            <div class="hero-background">
+                <img src="nature-biology.svg" alt="Fondo biológico" class="hero-bg-image">
+            </div>
+            <div class="nature-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Posteos Educativos</h1>
+                    <p class="hero-subtitle">Posteos crítico-analíticos sobre textos especializados en <strong>planificación curricular</strong>, <em>metodologías innovadoras</em> y más... desde la mirada de una docente de ciencias naturales.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Posts Section -->
+        <section class="posts-section">
+            <div class="container">
+                <div class="posts-grid" id="postsGrid">
+                    <!-- Posts will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EduNatura</h3>
+                    <p>Explorando la intersección entre educación y naturaleza para un aprendizaje significativo.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="recursos.html">Recursos</a></li>
+                        <li><a href="posteos.html">Posteos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 EduNatura. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        console.log('=== POSTEOS FIXED - INICIO ===');
+        
+        // Limpiar localStorage y cargar posts directamente
+        localStorage.removeItem('blogPosts');
+        
+        // Crear posts directamente
+        const posts = [
+            {
+                id: 'post-2-elementos-curriculo',
+                title: 'Los elementos del currículo como sistema integrado: reflexiones desde la enseñanza de las ciencias',
+                category: 'Análisis Curricular',
+                author: 'Docente de Ciencias Naturales',
+                tags: 'currículo, elementos curriculares, sistema educativo, enseñanza científica, integración pedagógica',
+                excerpt: 'Análisis del segundo capítulo de "Fundamentos del currículo" de Zaida Molina Bogantes, explorando la arquitectura curricular sistémica y su aplicación en la educación científica.',
+                content: 'Contenido completo del post 2...',
+                date: new Date().toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }),
+                readTime: 9
+            },
+            {
+                id: 'post-1-fundamentos',
+                title: 'Fundamentos del currículo: Una mirada crítica desde la enseñanza de las ciencias',
+                category: 'Análisis Curricular',
+                author: 'Docente de Ciencias Naturales',
+                tags: 'currículo, fundamentos, enseñanza científica, educación, pedagogía crítica',
+                excerpt: 'Análisis crítico del primer capítulo de "Fundamentos del currículo" de Zaida Molina Bogantes, desde la perspectiva de una docente de ciencias naturales.',
+                content: 'Contenido completo del post 1...',
+                date: new Date().toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }),
+                readTime: 8
+            }
+        ];
+        
+        // Guardar en localStorage
+        localStorage.setItem('blogPosts', JSON.stringify(posts));
+        console.log('Posts guardados:', posts.length);
+        
+        // Función para mostrar posts
+        function displayPosts() {
+            const postsGrid = document.getElementById('postsGrid');
+            if (!postsGrid) {
+                console.error('postsGrid no encontrado');
+                return;
+            }
+            
+            postsGrid.innerHTML = '';
+            
+            posts.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+                postCard.innerHTML = `
+                    <div class="post-header">
+                        <span class="post-category">${post.category}</span>
+                        <span class="post-date">${post.date}</span>
+                    </div>
+                    <h3 class="post-title">${post.title}</h3>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <div class="post-meta">
+                        <span class="post-author"><i class="fas fa-user"></i> ${post.author}</span>
+                        <span class="post-read-time"><i class="fas fa-clock"></i> ${post.readTime} min</span>
+                    </div>
+                    <div class="post-tags">
+                        ${post.tags.split(', ').map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <button class="btn-read-more" onclick="openModal('${post.id}')">
+                        Leer análisis completo
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                `;
+                postsGrid.appendChild(postCard);
+            });
+            
+            console.log('Posts mostrados en la página:', posts.length);
+        }
+        
+        // Función para abrir modal
+        function openModal(postId) {
+            console.log('Abriendo modal para post:', postId);
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                const modal = document.getElementById('postModal');
+                const modalContent = document.getElementById('modalContent');
+                modalContent.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <div class="post-meta">
+                        <span>${post.author} • ${post.date} • ${post.readTime} min de lectura</span>
+                    </div>
+                    <div class="post-content">
+                        ${post.content.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+                modal.style.display = 'block';
+            }
+        }
+        
+        // Cerrar modal
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('postModal');
+            if (event.target === modal || event.target.className === 'close') {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Cargar posts cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', displayPosts);
+        } else {
+            displayPosts();
+        }
+        
+        console.log('=== POSTEOS FIXED - FIN ===');
+    </script>
+</body>
+</html>

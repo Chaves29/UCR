@@ -353,14 +353,20 @@ function updatePostsDisplay() {
     const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
     const postsGrid = document.querySelector('.blog-posts');
     
+    console.log('updatePostsDisplay llamada, posts encontrados:', posts.length);
+    
     if (posts.length > 0 && postsGrid) {
-        // Add new posts to the beginning of the grid
-        posts.slice(0, 3).forEach((post, index) => {
-            if (!document.querySelector(`[data-post-id="${post.id}"]`)) {
-                const postElement = createPostElement(post);
-                postsGrid.insertBefore(postElement, postsGrid.firstChild);
-            }
+        // Limpiar grid existente
+        postsGrid.innerHTML = '';
+        
+        // Mostrar todos los posts
+        posts.forEach((post, index) => {
+            console.log(`Creando elemento para post ${index + 1}: ${post.title}`);
+            const postElement = createPostElement(post);
+            postsGrid.appendChild(postElement);
         });
+    } else {
+        console.log('No se encontraron posts o grid no existe');
     }
 }
 
@@ -395,15 +401,217 @@ function createPostElement(post) {
     return article;
 }
 
-// View full post (placeholder function)
+// View full post function
 function viewPost(postId) {
     const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
     const post = posts.find(p => p.id === postId);
     
     if (post) {
-        // In a real application, this would navigate to a post detail page
-        alert(`Análisis: ${post.title}\n\nContenido:\n${post.content}`);
+        // Crear modal para mostrar el contenido completo
+        createPostModal(post);
     }
+}
+
+// Crear modal para mostrar post completo
+function createPostModal(post) {
+    // Remover modal existente si existe
+    const existingModal = document.querySelector('.post-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Crear modal
+    const modal = document.createElement('div');
+    modal.className = 'post-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay" onclick="closePostModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closePostModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="post-category">${post.category}</div>
+                <h1 class="post-title">${post.title}</h1>
+                <div class="post-meta">
+                    <span class="post-author"><i class="fas fa-user"></i> ${post.author}</span>
+                    <span class="post-date"><i class="fas fa-calendar"></i> ${post.date}</span>
+                    <span class="post-reading-time"><i class="fas fa-clock"></i> ${post.readTime} min</span>
+                </div>
+                ${post.tags ? `<div class="post-tags">${post.tags.split(',').map(tag => `<span class="post-tag">${tag.trim()}</span>`).join('')}</div>` : ''}
+                <div class="post-content">${post.content.replace(/\n/g, '<br>')}</div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Agregar estilos del modal si no existen
+    if (!document.querySelector('#modal-styles')) {
+        addModalStyles();
+    }
+}
+
+// Cerrar modal
+function closePostModal() {
+    const modal = document.querySelector('.post-modal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Agregar estilos del modal
+function addModalStyles() {
+    const styles = document.createElement('style');
+    styles.id = 'modal-styles';
+    styles.textContent = `
+        .post-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 800px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(90vh - 80px);
+        }
+        
+        .modal-body .post-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .modal-body .post-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .modal-body .post-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f5f5f5;
+        }
+        
+        .modal-body .post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .modal-body .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-body .post-tag {
+            background: rgba(46, 125, 50, 0.1);
+            color: #2e7d32;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(46, 125, 50, 0.2);
+        }
+        
+        .modal-body .post-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95vw;
+                max-height: 95vh;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .modal-body .post-title {
+                font-size: 1.5rem;
+            }
+            
+            .modal-body .post-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    `;
+    document.head.appendChild(styles);
 }
 
 // Show notification
