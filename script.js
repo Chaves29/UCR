@@ -376,25 +376,50 @@ function createPostElement(post) {
     article.className = 'post-card';
     article.setAttribute('data-post-id', post.id);
     
-    const tags = post.tags ? post.tags.split(',').map(tag => `<span class="post-tag">${tag.trim()}</span>`).join('') : '';
+    // Seleccionar icono académico según la categoría
+    const categoryIcons = {
+        'Fundamentos Educativos': 'fas fa-graduation-cap',
+        'Análisis Curricular': 'fas fa-microscope',
+        'Metodología': 'fas fa-flask',
+        'Evaluación': 'fas fa-chart-line',
+        'Innovación': 'fas fa-lightbulb',
+        'default': 'fas fa-book-open'
+    };
+    
+    const iconClass = categoryIcons[post.category] || categoryIcons['default'];
+    
+    // Procesar tags con límite visual
+    const tags = post.tags ? post.tags.split(',').slice(0, 4).map(tag => 
+        `<span class="post-tag">${tag.trim()}</span>`
+    ).join('') : '';
+    
+    // Calcular tiempo de lectura si no existe
+    const readTime = post.readTime || post.readingTime || estimateReadingTime(post.content || post.excerpt);
     
     article.innerHTML = `
         <div class="post-image">
-            <i class="fas fa-book-open post-icon"></i>
+            <i class="${iconClass} post-icon"></i>
+            <div class="academic-badge">
+                <i class="fas fa-university"></i>
+                <span>Análisis Académico</span>
+            </div>
         </div>
         <div class="post-content">
             <div class="post-header">
                 <div class="post-category">${post.category}</div>
-                <div class="post-author">Análisis de: ${post.author}</div>
+                <div class="post-author">${post.author}</div>
             </div>
             <h3 class="post-title">${post.title}</h3>
             <p class="post-excerpt">${post.excerpt}</p>
-            <div class="post-meta">
-                <span class="post-date"><i class="fas fa-calendar"></i> ${post.date}</span>
-                <span class="post-reading-time"><i class="fas fa-clock"></i> ${post.readingTime}</span>
-            </div>
             ${tags ? `<div class="post-tags">${tags}</div>` : ''}
-            <a href="#" class="post-link" onclick="viewPost('${post.id}')">Leer análisis completo <i class="fas fa-arrow-right"></i></a>
+            <div class="post-meta">
+                <span class="post-date"><i class="fas fa-calendar-alt"></i> ${post.date}</span>
+                <span class="post-reading-time"><i class="fas fa-clock"></i> ${readTime} min</span>
+            </div>
+            <a href="#" class="post-link" onclick="viewPost('${post.id}')">
+                <span>Leer análisis completo</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
         </div>
     `;
     
